@@ -1,3 +1,16 @@
+flipkart-card-project/
+├─ pages/
+│  ├─ index.js           # Redirects to login
+│  ├─ login.js           # Login page
+│  ├─ dashboard.js       # Card + Fake Payment
+├─ firebase.js           # Firebase config
+├─ package.json
+├─ next.config.js
+└─ README.md
+
+
+
+
 # flipkart-card
 Flipkart card ssc html 
 <!DOCTYPE html>
