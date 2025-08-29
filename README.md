@@ -1,3 +1,91 @@
+export default function Dashboard() {
+  const handleFakePayment = (method) => {
+    alert(`Payment Successful via ${method}!`);
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Your Flipkart Card</h1>
+      <p>Card Number: 1234 5678 9012 3456</p>
+      <p>Expiry: 12/28</p>
+      <p>CVV: 123</p>
+
+      <h2>Make Payment</h2>
+      <button onClick={() => handleFakePayment("UPI")}>Pay with UPI</button>
+      <button onClick={() => handleFakePayment("Google Pay")}>Pay with Google Pay</button>
+      <button onClick={() => handleFakePayment("PhonePe")}>Pay with PhonePe</button>
+    </div>
+  );
+}
+
+
+
+
+import { useState } from "react";
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+import { useRouter } from "next/router";
+
+export default function Login() {
+  const [phone, setPhone] = useState("");
+  const router = useRouter();
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      alert("Google Login Successful!");
+      router.push("/dashboard");
+    } catch (err) {
+      alert("Login Failed!");
+    }
+  };
+
+  const handlePhoneLogin = () => {
+    alert(`Fake OTP sent to ${phone}. Logged in successfully!`);
+    router.push("/dashboard");
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>Login</h1>
+      <input
+        type="text"
+        placeholder="Enter Phone Number"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <button onClick={handlePhoneLogin}>Login with Phone</button>
+      <hr />
+      <button onClick={handleGoogleLogin}>Login with Google</button>
+    </div>
+  );
+}
+
+
+
+
+
+
+{
+  "name": "flipkart-card-project",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "13.5.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "firebase": "^10.10.0"
+  }
+}
+
+
+
+
+
 flipkart-card-project/
 ├─ pages/
 │  ├─ index.js           # Redirects to login
